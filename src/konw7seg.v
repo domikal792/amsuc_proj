@@ -20,23 +20,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module konw7seg(IN, OUT);
+module konw7seg(IN, DP, OUT);
 input [3:0] IN;
+input DP;
 output reg [7:0] OUT;
 
 always @(IN) begin
     case(IN)
-        4'h0: OUT = 8'b1000000;
-        4'h1: OUT = 8'b1111001;
-        4'h2: OUT = 8'b0100100;
-        4'h3: OUT = 8'b0110000;
-        4'h4: OUT = 8'b0011001;
-        4'h5: OUT = 8'b0010010;
-        4'h6: OUT = 8'b0000010;
-        4'h7: OUT = 8'b1111000;
-        4'h8: OUT = 8'b0000000;
-        4'h9: OUT = 8'b0010000;
-        default: OUT = 8'b1000000;
+        4'h0: OUT = {DP, 7'b1000000};
+        4'h1: OUT = {DP, 7'b1111001};
+        4'h2: OUT = {DP, 7'b0100100};
+        4'h3: OUT = {DP, 7'b0110000};
+        4'h4: OUT = {DP, 7'b0011001};
+        4'h5: OUT = {DP, 7'b0010010};
+        4'h6: OUT = {DP, 7'b0000010};
+        4'h7: OUT = {DP, 7'b1111000};
+        4'h8: OUT = {DP, 7'b0000000};
+        4'h9: OUT = {DP, 7'b0010000};
+        default: OUT = {DP, 7'b1000000};
     endcase 
 end
 
