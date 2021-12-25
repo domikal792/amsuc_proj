@@ -1,0 +1,33 @@
+{
+    "folders": [
+        {
+            "name": "Timer",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "fileHeaderComment.parameter": {
+            "*": {
+                "commentprefix": "///",
+            }
+        },
+        "fileHeaderComment.template": {
+            "*" : [
+                "`timescale 1ns / 1ps",
+                "${commentprefix} @file ${filename}", 
+                "${commentprefix}",
+                "${commentprefix} @note Copyright (c) ${year} ArmCpp - Kala, Jaraczewski",
+            ]
+        },
+        "cSpell.language": "en",
+    },
+    "extensions": {
+        "recommendations": [
+            "eamodio.gitlens", 
+            "doi.fileheadercomment",
+            "streetsidesoftware.code-spell-checker",
+            "shd101wyy.markdown-preview-enhanced",
+            "mshr-h.veriloghdl"
+        ]
+    }
+}
