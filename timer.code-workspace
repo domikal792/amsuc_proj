@@ -27,7 +27,9 @@
             "doi.fileheadercomment",
             "streetsidesoftware.code-spell-checker",
             "shd101wyy.markdown-preview-enhanced",
-            "mshr-h.veriloghdl"
+            "mshr-h.veriloghdl",
+            "hediet.vscode-drawio",
+            "nopeslide.vscode-drawio-plugin-rtl"
         ]
     }
 }
