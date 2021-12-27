@@ -1,30 +1,13 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10.12.2021 11:36:08
-// Design Name: 
-// Module Name: konw7seg
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+/// @file dec_to_7seg.v
+///
+/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
-
-module konw7seg(IN, DP, OUT);
-input [3:0] IN;
-input DP;
-output reg [7:0] OUT;
-
+module DEC_TO_7SEG(
+    input [3:0] IN, 
+    input DP, 
+    output reg [7:0] OUT
+);
 always @(IN) begin
     case(IN)
         4'h0: OUT = {DP, 7'b1000000};
@@ -37,7 +20,7 @@ always @(IN) begin
         4'h7: OUT = {DP, 7'b1111000};
         4'h8: OUT = {DP, 7'b0000000};
         4'h9: OUT = {DP, 7'b0010000};
-        default: OUT = {DP, 7'b1000000};
+        default: OUT = 8'b11000000;
     endcase 
 end
 
