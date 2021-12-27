@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
-/// @file ring_cnt.v
+/// @file ring_counter.v
 ///
-/// @note Copyright (c) 2021 ArmCpp - Kala, Jaraczewski
+/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
 module RING_CNT #(
   parameter BITS_NUM = 8,
