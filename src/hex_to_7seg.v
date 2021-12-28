@@ -10,7 +10,7 @@ module HEX_TO_7SEG(
   input DP, 
   output reg [7:0] Q
 );
-  always @(IN) begin
+  always @(IN or DP) begin
     case(IN)
       4'h0: Q = {DP, 7'b1000000};
       4'h1: Q = {DP, 7'b1111001};

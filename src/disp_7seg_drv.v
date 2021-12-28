@@ -9,11 +9,11 @@ module DISP_7SEG_DRV(
   input CE, 
   input [7:0] E,
   input [7:0] DP,
-  input [3:0] IN[7:0], 
+  input [31:0] IN, 
   output [7:0] EO,
   output [7:0] Q
 );
-  reg [7:0] zero_hot_q;
+  wire [7:0] zero_hot_q;
   reg [3:0] data;
   reg a_dp;
 
@@ -35,14 +35,14 @@ module DISP_7SEG_DRV(
 
   always @(posedge CLK) begin
     case (E)
-      8'b11111110 : {a_dp, data} = {DP[0], IN[0]};
-      8'b11111101 : {a_dp, data} = {DP[1], IN[1]};
-      8'b11111011 : {a_dp, data} = {DP[2], IN[2]};
-      8'b11110111 : {a_dp, data} = {DP[3], IN[3]};
-      8'b11101111 : {a_dp, data} = {DP[4], IN[4]};
-      8'b11011111 : {a_dp, data} = {DP[5], IN[5]};
-      8'b10111111 : {a_dp, data} = {DP[6], IN[6]};
-      8'b01111111 : {a_dp, data} = {DP[7], IN[7]};
+      8'b11111110 : {a_dp, data} = {DP[0], IN[3:0]};
+      8'b11111101 : {a_dp, data} = {DP[1], IN[7:4]};
+      8'b11111011 : {a_dp, data} = {DP[2], IN[11:8]};
+      8'b11110111 : {a_dp, data} = {DP[3], IN[15:12]};
+      8'b11101111 : {a_dp, data} = {DP[4], IN[19:16]};
+      8'b11011111 : {a_dp, data} = {DP[5], IN[23:20]};
+      8'b10111111 : {a_dp, data} = {DP[6], IN[27:24]};
+      8'b01111111 : {a_dp, data} = {DP[7], IN[31:28]};
       default: {a_dp, data} = {1'b0, 4'b1111};
     endcase
   end

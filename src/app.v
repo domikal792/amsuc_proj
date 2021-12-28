@@ -16,7 +16,7 @@ module APP(
   wire timer_prescaler_cnt_ceo;
   wire [13:0] secs_cnt_q;
   wire secs_cnt_ceo;
-  reg [3:0] data[7:0];
+  reg [31:0] data;
 
   DOWN_CNT #(
     .BITS_NUM(17),
@@ -33,8 +33,8 @@ module APP(
     .CLK(CLK),
     .CLR(CLR),
     .CE(disp_refresh_cnt_ceo),
-    .E(8b'00001111),
-    .DP(8b'11111101),
+    .E(8'b00001111),
+    .DP(8'b11111101),
     .IN(data),
     .EO(E),
     .Q(Q)
@@ -63,9 +63,9 @@ module APP(
   );
 
   always @(posedge CLK) begin
-      data[0] = ((secs_cnt_ceo) % 10);
-      data[1] = ((secs_cnt_ceo / 10) % 10);
-      data[2] = ((secs_cnt_ceo / 100) % 10);
-      data[3] = ((secs_cnt_ceo / 1000) % 10);
+      data[3:0] = ((secs_cnt_ceo) % 10);
+      data[7:4] = ((secs_cnt_ceo / 10) % 10);
+      data[11:8] = ((secs_cnt_ceo / 100) % 10);
+      data[15:12] = ((secs_cnt_ceo / 1000) % 10);
   end
 endmodule
