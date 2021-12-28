@@ -9,7 +9,7 @@ Dynamic 7seg display, support for 8 modules. Down counter, ring counter, convert
 Simple app that displays 10Hz down counter output.
 
 ## TODO:
-- Tests of feat/timer/v1
+- Tests of feat/timer-v1
 - Buttons support
 - Start / Stop support
 - Clear support
