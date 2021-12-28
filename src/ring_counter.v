@@ -14,7 +14,7 @@ module RING_CNT #(
 );    
   always @(posedge CLK or posedge CLR) begin
     if (CLR)
-      Q <= {BITS_NUM{~ACT_STATE}}
+      Q <= {BITS_NUM{~ACT_STATE}};
     else begin
       if (CE) begin
         if (ACT_STATE)
