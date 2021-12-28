@@ -3,6 +3,8 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+// TODO: Add support for truning off display.
+
 module HEX_TO_7SEG(
   input [3:0] IN, 
   input DP, 
