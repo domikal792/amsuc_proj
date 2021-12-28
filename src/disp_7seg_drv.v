@@ -1,45 +1,52 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10.12.2021 11:51:28
-// Design Name: 
-// Module Name: wyswietlacz
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+/// @file disp_7seg_drv.v
+///
+/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+module DISP_7SEG_DRV(
+  input CLK, 
+  input CLR, 
+  input CE, 
+  input [7:0] E,
+  input [7:0] DP,
+  input [3:0] IN[7:0], 
+  output [7:0] EO,
+  output [7:0] Q
+);
+  reg [7:0] zero_hot_q;
+  reg [3:0] data;
+  reg a_dp;
 
-module wyswietlacz(CLK, CLR, CE, IN, E, Q);
-input CLK, CLR, CE;
-input [13:0] IN;
-output [3:0] E;
-output [7:0] Q;
+  RING_CNT #(
+    .BITS_NUM(8),
+    .ACT_STATE(0)
+  ) zero_hot (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(CE),
+    .Q(zero_hot_q)
+  );
 
-//reg [3:0] en;
-reg [3:0] liczba;
+  HEX_TO_7SEG hex_to_7seg(
+    .IN(data),
+    .DP(a_dp),
+    .Q(Q)
+  );
 
-krazace_zero kz(CLK, CLR, CE, E);
+  always @(posedge CLK) begin
+    case (E)
+      8'b11111110 : {a_dp, data} = {DP[0], IN[0]};
+      8'b11111101 : {a_dp, data} = {DP[1], IN[1]};
+      8'b11111011 : {a_dp, data} = {DP[2], IN[2]};
+      8'b11110111 : {a_dp, data} = {DP[3], IN[3]};
+      8'b11101111 : {a_dp, data} = {DP[4], IN[4]};
+      8'b11011111 : {a_dp, data} = {DP[5], IN[5]};
+      8'b10111111 : {a_dp, data} = {DP[6], IN[6]};
+      8'b01111111 : {a_dp, data} = {DP[7], IN[7]};
+      default: {a_dp, data} = {1'b0, 4'b1111};
+    endcase
+  end
 
-konw7seg k7s(liczba, Q);
+  assign EO = E & zero_hot_q;
 
-always @(posedge CLK) begin
-        case (E)
-            4'b1110 : liczba = ((IN / 1000) % 10);
-            4'b1101 : liczba = ((IN / 100) % 10);
-            4'b1011 : liczba = ((IN / 10) % 10);
-            4'b0111 : liczba = (IN % 10);
-            default: liczba = 0;
-        endcase
-    end
 endmodule

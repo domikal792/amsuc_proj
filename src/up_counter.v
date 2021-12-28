@@ -1,9 +1,9 @@
 `timescale 1ns / 1ps
-/// @file up_counter.v
+/// @file down_counter.v
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
-module UP_CNT #(
+module DOWN_CNT #(
   parameter BITS_NUM = 8,
   parameter MODULO = 10
 ) (
@@ -18,14 +18,14 @@ module UP_CNT #(
       Q <= {BITS_NUM{1'b0}};
     else begin
       if (CE) begin
-        if (Q != MODULO-1)
-          Q <= Q + 1;
+        if (Q != 0)
+          Q <= Q - 1;
         else
-          Q <= {BITS_NUM{1'b0}};
+          Q <= MODULO - 1;
       end
     end
   end
 
-  assign CEO = CE & (Q == MODULO-1);
+  assign CEO = CE & (Q == 0);
 
 endmodule
