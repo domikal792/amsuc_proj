@@ -4,7 +4,7 @@
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
 module DOWN_CNT #(
-  parameter BITS_NUM = 8,
+  parameter BITS_NUM = 8, // TODO: Check if possible to replace with $clog2()
   parameter MODULO = 10
 ) (
   input CLK,

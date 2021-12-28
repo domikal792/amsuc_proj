@@ -1,43 +1,71 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 17.12.2021 10:40:39
-// Design Name: 
-// Module Name: app
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+/// @file app.v
+///
+/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+module APP(
+  input CLK, 
+  input CLR, 
+  input CE, 
+  output [7:0] E, 
+  output [7:0] Q
+);
+  wire [16:0] disp_refresh_cnt_q;
+  wire disp_refresh_cnt_ceo;
+  wire [26:0] timer_prescaler_cnt_q;
+  wire timer_prescaler_cnt_ceo;
+  wire [13:0] secs_cnt_q;
+  wire secs_cnt_ceo;
+  reg [3:0] data[7:0];
 
-module app(CLK, CE, CLR, E, Q);
-input CLK, CLR, CE;
-output [3:0] E;
-output [7:0] Q;
-wire [26:0] cnt_q;
-wire [13:0] cnt_q2;
-wire ceo, ceo2;
+  DOWN_CNT #(
+    .BITS_NUM(17),
+    .MODULO(100000)
+  ) disp_refresh_cnt (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(CE),
+    .Q(disp_refresh_cnt_q),
+    .CEO(disp_refresh_cnt_ceo)
+  );
 
-CNT #(
-    .BITS_NUM(27), 
-    .MOD(10000000)
-) cnt(CLK, CLR, CE, cnt_q, ceo);
+  DISP_7SEG_DRV disp_7seg_drv (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(disp_refresh_cnt_ceo),
+    .E(8b'00001111),
+    .DP(8b'11111101),
+    .IN(data),
+    .EO(E),
+    .Q(Q)
+  );
 
-CNT #(
-    .BITS_NUM(14), 
-    .MOD(10000)
-) cnt2(CLK, CLR, ceo, cnt_q2, ceo2);
+  DOWN_CNT #(
+    .BITS_NUM(27),
+    .MODULO(10000000)
+  ) timer_prescaler_cnt (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(CE),
+    .Q(timer_prescaler_cnt_q),
+    .CEO(timer_prescaler_cnt_ceo)
+  );
 
-wyswietlacz wys(CLK, CLR, CE, cnt_q2, E, Q);
+  DOWN_CNT #(
+    .BITS_NUM(14),
+    .MODULO(10000)
+  ) secs_cnt (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(timer_prescaler_cnt_ceo),
+    .Q(secs_cnt_q),
+    .CEO(secs_cnt_ceo)
+  );
 
+  always @(posedge CLK) begin
+      data[0] = ((secs_cnt_ceo) % 10);
+      data[1] = ((secs_cnt_ceo / 10) % 10);
+      data[2] = ((secs_cnt_ceo / 100) % 10);
+      data[3] = ((secs_cnt_ceo / 1000) % 10);
+  end
 endmodule
