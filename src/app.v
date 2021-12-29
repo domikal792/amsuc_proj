@@ -34,7 +34,7 @@ module APP(
     .CLR(CLR),
     .CE(disp_refresh_cnt_ceo),
     .E(8'b00001111),
-    .DP(8'b11111101),
+    .DP(8'b00000010),
     .IN(data),
     .EO(E),
     .Q(Q)
@@ -63,9 +63,9 @@ module APP(
   );
 
   always @(posedge CLK) begin
-      data[3:0] = ((secs_cnt_ceo) % 10);
-      data[7:4] = ((secs_cnt_ceo / 10) % 10);
-      data[11:8] = ((secs_cnt_ceo / 100) % 10);
-      data[15:12] = ((secs_cnt_ceo / 1000) % 10);
+      data[3:0] = ((secs_cnt_q) % 10);
+      data[7:4] = ((secs_cnt_q / 10) % 10);
+      data[11:8] = ((secs_cnt_q / 100) % 10);
+      data[15:12] = ((secs_cnt_q / 1000) % 10);
   end
 endmodule
