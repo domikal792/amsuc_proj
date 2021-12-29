@@ -76,7 +76,7 @@ module APP(
   ) dec_to_bcd (
     .CLK(CLK),
     .CLR(CLR),
-    .CE(secs_cnt_ceo),
+    .CE(btn_start_debouncer_up),
     .IN(secs_cnt_q),
     .Q(data)
   );
