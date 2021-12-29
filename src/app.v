@@ -14,7 +14,8 @@ module APP(
   wire refresh_cnt_ceo;
   // wire timer_prescaler_cnt_ceo;
   wire [13:0] secs_cnt_q;
-  reg [31:0] data;
+  wire secs_cnt_ceo;
+  wire [31:0] data;
   wire btn_start_debouncer_up;
 
   // 1ms
@@ -53,11 +54,11 @@ module APP(
     .CLK(CLK),
     .CLR(CLR),
     .CE(btn_start_debouncer_up), // .CE(timer_prescaler_cnt_ceo),
-    .Q(secs_cnt_q)
+    .Q(secs_cnt_q),
+    .CEO(secs_cnt_ceo)
   );
 
   SWITCH_DEBOUNCER #(
-//    .REPEAT_PRESC_CNT_BITS_NUM(11),
     .REPEAT_PRESC_CNT_MODULO(125), // 125ms => 8Hz
     .REPEAT_START_DELAY(2000) // 2s
   ) btn_start_debouncer (
@@ -69,10 +70,14 @@ module APP(
     .KEY_UP(btn_start_debouncer_up)
   );
 
-  always @(posedge CLK) begin
-    data[3:0] = ((secs_cnt_q) % 4'd10);
-    data[7:4] = ((secs_cnt_q / 13'd10) % 4'd10);
-    data[11:8] = ((secs_cnt_q / 13'd100) % 4'd10);
-    data[15:12] = ((secs_cnt_q / 13'd1000) % 4'd10);
-  end
+  DEC_TO_BCD #(
+    .IN_BITS_NUM(14),
+    .OUT_DECADES(4)
+  ) dec_to_bcd (
+    .CLK(CLK),
+    .CLR(CLR),
+    .CE(secs_cnt_ceo),
+    .IN(secs_cnt_q),
+    .Q(data)
+  );
 endmodule
