@@ -19,6 +19,7 @@ module SWITCH_DEBOUNCER #(
   reg [BITS_NUM-1:0] P_OUT;
   wire repeat_presc_cnt_ceo;
   wire key_up_loc;
+  wire key_up_repeat;
 
   DOWN_CNT #(
     .MODULO(REPEAT_PRESC_CNT_MODULO),
@@ -41,7 +42,8 @@ module SWITCH_DEBOUNCER #(
 
   // It is also used to clear 'repeat_presc_cnt' 
   assign key_up_loc = ((&P_OUT[BITS_NUM-2:0]) & ~P_OUT[BITS_NUM-1] & CE); 
-  assign KEY_UP = (key_up_loc | (&P_OUT[BITS_NUM-1:0]) & repeat_presc_cnt_ceo);
+  assign key_up_repeat = ((&P_OUT[BITS_NUM-1:0]) & repeat_presc_cnt_ceo);
+  assign KEY_UP = (key_up_loc | key_up_repeat);
   assign KEY_EN = (&P_OUT[BITS_NUM-1:0]);
 
 endmodule
