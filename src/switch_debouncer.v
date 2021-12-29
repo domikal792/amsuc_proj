@@ -11,7 +11,7 @@ module SWITCH_DEBOUNCER #(
   input CLK, 
   input CLR, 
   input CE,
-  input REP_EN,
+  input REP_CE,
   input S_IN, 
   output KEY_EN, 
   output KEY_UP
@@ -25,7 +25,7 @@ module SWITCH_DEBOUNCER #(
   ) repeat_presc_cnt (
     .CLK(CLK),
     .CLR(~KEY_EN),
-    .CE(REP_EN),
+    .CE(REP_CE),
     .CEO(repeat_presc_cnt_ceo)
   );
 

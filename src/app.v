@@ -65,7 +65,7 @@ module APP(
     .CLK(CLK),
     .CLR(CLR),
     .CE(refresh_cnt_ceo),
-    .REP_EN(refresh_cnt_ceo),
+    .REP_CE(refresh_cnt_ceo),
     .S_IN(BTN_START),
     .KEY_UP(btn_start_debouncer_up)
   );
