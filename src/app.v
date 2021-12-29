@@ -33,7 +33,7 @@ module APP(
     .CLR(CLR),
     .CE(refresh_cnt_ceo),
     .E(8'b00001111),
-    .DP(8'b11111101),
+    .DP(8'b00000010),
     .IN(data),
     .EO(E),
     .Q(Q)

@@ -34,19 +34,19 @@ module DISP_7SEG_DRV(
   );
 
   always @(posedge CLK) begin
-    case (E)
-      8'b11111110 : {a_dp, data} = {DP[0], IN[3:0]};
-      8'b11111101 : {a_dp, data} = {DP[1], IN[7:4]};
-      8'b11111011 : {a_dp, data} = {DP[2], IN[11:8]};
-      8'b11110111 : {a_dp, data} = {DP[3], IN[15:12]};
-      8'b11101111 : {a_dp, data} = {DP[4], IN[19:16]};
-      8'b11011111 : {a_dp, data} = {DP[5], IN[23:20]};
-      8'b10111111 : {a_dp, data} = {DP[6], IN[27:24]};
-      8'b01111111 : {a_dp, data} = {DP[7], IN[31:28]};
+    case (zero_hot_q)
+      8'b11111110 : {a_dp, data} = {~DP[0], IN[3:0]};
+      8'b11111101 : {a_dp, data} = {~DP[1], IN[7:4]};
+      8'b11111011 : {a_dp, data} = {~DP[2], IN[11:8]};
+      8'b11110111 : {a_dp, data} = {~DP[3], IN[15:12]};
+      8'b11101111 : {a_dp, data} = {~DP[4], IN[19:16]};
+      8'b11011111 : {a_dp, data} = {~DP[5], IN[23:20]};
+      8'b10111111 : {a_dp, data} = {~DP[6], IN[27:24]};
+      8'b01111111 : {a_dp, data} = {~DP[7], IN[31:28]};
       default: {a_dp, data} = {1'b0, 4'b1111};
     endcase
   end
 
-  assign EO = E & zero_hot_q;
+  assign EO = ~(E & ~zero_hot_q);
 
 endmodule

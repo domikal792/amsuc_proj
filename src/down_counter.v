@@ -6,7 +6,7 @@
 module DOWN_CNT #(
   parameter MODULO = 10,
   parameter INIT_VAL = MODULO - 1,
-  parameter BITS_NUM = $clog2(MODULO)
+  parameter BITS_NUM = $clog2(MODULO < INIT_VAL ? INIT_VAL : MODULO)
 ) (
   input CLK,
   input CLR,
