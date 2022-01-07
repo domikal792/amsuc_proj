@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 /// @file hex_to_7seg.v
 ///
-/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
+/// @note Copyright (c) 2022 AMSUC - Countdown Timer - Dominik Kala i Dawid Jaraczewski
 
 /// Kombinacyjny konwerter liczb zapisanych w systemie szesnastkowym do kodu wyswietlacza 7 segmentowego.
 ///

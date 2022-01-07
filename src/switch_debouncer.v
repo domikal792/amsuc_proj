@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 /// @file switch_debouncer.v
 ///
-/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
+/// @note Copyright (c) 2022 AMSUC - Countdown Timer - Dominik Kala i Dawid Jaraczewski
 
 /// Uklad filtrujacy drgania stykow oraz generujacy repetycje po zadanym czasie.
 ///

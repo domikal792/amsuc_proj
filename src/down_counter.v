@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 /// @file down_counter.v
 ///
-/// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
+/// @note Copyright (c) 2022 AMSUC - Countdown Timer - Dominik Kala i Dawid Jaraczewski
 
 /// Licznik liczacy w dol.
 ///
