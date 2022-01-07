@@ -3,6 +3,18 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+/// Logika aplikacji.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara logiki sterujacej.
+/// @param [IN] BTN_START - Sygnal z fizycznego przycisku startu.
+/// @param [IN] BTN_MIN_P - Sygnal z fizycznego przycisku inkrementacji minut.
+/// @param [IN] BTN_MIN_M - Sygnal z fizycznego przycisku dekrementacji minut.
+/// @param [IN] BTN_SEC_P - Sygnal z fizycznego przycisku inkrementacji sekund.
+/// @param [IN] BTN_SEC_M - Sygnal z fizycznego przycisku dekrementacji sekund.
+/// @param [OUT] E - Wektor aktywujacy poszczegolna cyfre wyswietlacza.
+/// @param [OUT] Q - Dane do wyswietlenia na wybranej cyfrze wyswietlacza.
 module APP(
   input CLK, 
   input CLR, 
@@ -31,7 +43,7 @@ module APP(
   wire is_running_countdown_timer;
   wire blink;
 
-  // 1ms
+  // Preskaler zegara na 1ms.
   DOWN_CNT #(
     .MODULO(17'd100000)
   ) refresh_cnt (
@@ -41,18 +53,19 @@ module APP(
     .CEO(refresh_cnt_ceo)
   );
 
+  // Instancja sterownika wyswietlacza.
   DISP_7SEG_DRV disp_7seg_drv (
     .CLK(CLK),
     .CLR(CLR),
     .CE(refresh_cnt_ceo),
-    .E(8'b01110011),
+    .E((8'b01110011 & {8{CE}})),
     .DP({8{~is_running_countdown_timer & blink}}),
     .IN(disp_data),
     .EO(E),
     .Q(Q)
   );
 
-  // 1s
+  // Preskaler zegara na 1s
   DOWN_CNT #(
     .MODULO(27'd100000000)
   ) countdown_timer_presc_cnt (
@@ -62,6 +75,7 @@ module APP(
     .CEO(countdown_timer_presc_cnt_ceo)
   );
 
+  // Licznik generujacy sygnal do mrugania kropkami.
   DOWN_CNT #(
     .MODULO(2'd2)
   ) blink_cnt (
@@ -71,6 +85,7 @@ module APP(
     .Q(blink)
   );
 
+  // Eliminacja drgan przycisku startu.
   SWITCH_DEBOUNCER #(
     .REPEAT_PRESC_CNT_MODULO(BTN_REPEAT_INTVAL_MS),
     .REPEAT_START_DELAY(BTN_START_DELAY_MS)
@@ -83,6 +98,7 @@ module APP(
     .KEY_UP(btn_start_debouncer_up)
   );
 
+  // Eliminacja drgan przycisku inkrementacji minut.
   SWITCH_DEBOUNCER #(
     .REPEAT_PRESC_CNT_MODULO(BTN_REPEAT_INTVAL_MS),
     .REPEAT_START_DELAY(BTN_START_DELAY_MS)
@@ -95,6 +111,7 @@ module APP(
     .KEY_UP(btn_min_inc_debouncer_up)
   );
 
+  // Eliminacja drgan przycisku dekrementacji minut.
   SWITCH_DEBOUNCER #(
     .REPEAT_PRESC_CNT_MODULO(BTN_REPEAT_INTVAL_MS),
     .REPEAT_START_DELAY(BTN_START_DELAY_MS)
@@ -107,6 +124,7 @@ module APP(
     .KEY_UP(btn_min_dec_debouncer_up)
   );
 
+  // Eliminacja drgan przycisku inkrementacji sekund.
   SWITCH_DEBOUNCER #(
     .REPEAT_PRESC_CNT_MODULO(BTN_REPEAT_INTVAL_MS),
     .REPEAT_START_DELAY(BTN_START_DELAY_MS)
@@ -119,6 +137,7 @@ module APP(
     .KEY_UP(btn_sec_inc_debouncer_up)
   );
 
+  // Eliminacja drgan przycisku dekrementacji sekund.
   SWITCH_DEBOUNCER #(
     .REPEAT_PRESC_CNT_MODULO(BTN_REPEAT_INTVAL_MS),
     .REPEAT_START_DELAY(BTN_START_DELAY_MS)
@@ -131,6 +150,7 @@ module APP(
     .KEY_UP(btn_sec_dec_debouncer_up)
   );
 
+  // Konwersja minut na BCD.
   DEC_TO_BCD #(
     .IN_BITS_NUM(CNTDOWN_TIMER_BITS_NUM),
     .OUT_DECADES(3)
@@ -142,6 +162,7 @@ module APP(
     .Q(disp_data[27:16])
   );
   
+  // Konwersja sekund na BCD.
   DEC_TO_BCD #(
     .IN_BITS_NUM(CNTDOWN_TIMER_BITS_NUM),
     .OUT_DECADES(2)
@@ -153,6 +174,7 @@ module APP(
     .Q(disp_data[7:0])
   );
   
+  // Instanacja modulu sterujacego logika minutnika.
   CNTDOWN_TIMER #(
     .MAX_VAL(CNTDOWN_TIMER_MAX_VAL)
   ) cntdown_timer (

@@ -3,6 +3,16 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+/// Sterownik wyswietlacza.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara.
+/// @param [IN] E - Wektor aktywacji poszczegolnych wyswietlaczy.
+/// @param [IN] DP - Wektor bitow sterujacych kropkami wyswietlaczy.
+/// @param [IN] IN - Wektor zawieracjacy dane hex do wyswietlania na poszczegolnym wyswietlaczu, 4bity na pojedyncza cyfre.
+/// @param [OUT] EO - Wektor aktywujacy poszczegolna cyfre wyswietlacza.
+/// @param [OUT] Q - Dane do wyswietlenia na wybranej cyfrze wyswietlacza.
 module DISP_7SEG_DRV(
   input CLK, 
   input CLR, 
@@ -17,6 +27,7 @@ module DISP_7SEG_DRV(
   reg [3:0] data;
   reg a_dp;
 
+  // Krazace zero uzywane do aktywacji kolejnych cyfr.
   RING_CNT #(
     .BITS_NUM(8),
     .ACT_STATE(0)
@@ -27,12 +38,14 @@ module DISP_7SEG_DRV(
     .Q(zero_hot_q)
   );
 
+  // Konwerter liczb zapisanych w hex na 7 seg.
   HEX_TO_7SEG hex_to_7seg(
     .IN(data),
     .DP(a_dp),
     .Q(Q)
   );
 
+  // Synchroniczny multiplekser.
   always @(posedge CLK) begin
     case (zero_hot_q)
       8'b11111110 : {a_dp, data} = {~DP[0], IN[3:0]};
@@ -47,6 +60,7 @@ module DISP_7SEG_DRV(
     endcase
   end
 
+  // Wypracowanie sygnalu aktuwujacego poszczegolna cyfre wyswietlacza.
   assign EO = ~(E & ~zero_hot_q);
 
 endmodule

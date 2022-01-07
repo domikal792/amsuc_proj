@@ -3,6 +3,11 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+/// Kombinacyjny konwerter liczb zapisanych w systemie szesnastkowym do kodu wyswietlacza 7 segmentowego.
+///
+/// @param [IN] IN - Wektor wejsciowy.
+/// @param [IN] DP - Sterowanie kropka wyswietlacza.
+/// @param [OUT] Q - Wyjscie liczby zapisanej w kodzie wyswietlacza 7 seg.
 module HEX_TO_7SEG(
   input [3:0] IN, 
   input DP, 

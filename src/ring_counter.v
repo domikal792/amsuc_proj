@@ -3,6 +3,15 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+/// Licznik kołowy - krazaca jedynka badz krazace zero.
+///
+/// @tparam BITS_NUM - Liczba bitow licznika.
+/// @tparam ACT_STATE - Aktywny stan, 0 lub 1.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara.
+/// @param [OUT] Q - Rownolegle wyjscie licznika.
 module RING_CNT #(
   parameter BITS_NUM = 8,
   parameter ACT_STATE = 1'b1
@@ -18,9 +27,9 @@ module RING_CNT #(
     else begin
       if (CE) begin
         if (ACT_STATE)
-          Q <= {Q[BITS_NUM-2:0], ~|Q[BITS_NUM-2:0]};
+          Q <= {Q[BITS_NUM-2:0], ~|Q[BITS_NUM-2:0]}; // Krazaca jedynka z samokorekcja.
         else
-          Q <= {Q[BITS_NUM-2:0], ~&Q[BITS_NUM-2:0]};
+          Q <= {Q[BITS_NUM-2:0], ~&Q[BITS_NUM-2:0]}; // Krazace zero z samokorekcja.
       end
     end
   end

@@ -3,6 +3,17 @@
 ///
 /// @note Copyright (c) 2021 AMSUC - Countdown Timer - Kala, Jaraczewski
 
+/// Konwerter liczb dziesietnych na BCD.
+///
+/// @tparam IN_BITS_NUM - Liczba bitow wejsciowej liczby.
+/// @tparam OUT_DECADES - Liczba dekad BCD.
+/// @tparam OUT_BITS_NUM - Liczba bitow danych wyjsciowych.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara.
+/// @param [OUT] IN - Liczba dziesietna.
+/// @param [OUT] Q - Liczba zapisana w systemie BCD.
 module DEC_TO_BCD #(
   parameter IN_BITS_NUM = 4,
   parameter OUT_DECADES = 1,
