@@ -1,7 +1,7 @@
 {
     "folders": [
         {
-            "name": "Timer",
+            "name": "Countdown Timer",
             "path": "."
         }
     ],
@@ -16,7 +16,7 @@
                 "`timescale 1ns / 1ps",
                 "${commentprefix} @file ${filename}", 
                 "${commentprefix}",
-                "${commentprefix} @note Copyright (c) ${year} ArmCpp - Kala, Jaraczewski",
+                "${commentprefix} @note Copyright (c) ${year} AMSUC - Countdown Timer - Kala, Jaraczewski",
             ]
         },
         "cSpell.language": "en",
@@ -27,7 +27,9 @@
             "doi.fileheadercomment",
             "streetsidesoftware.code-spell-checker",
             "shd101wyy.markdown-preview-enhanced",
-            "mshr-h.veriloghdl"
+            "mshr-h.veriloghdl",
+            "hediet.vscode-drawio",
+            "nopeslide.vscode-drawio-plugin-rtl"
         ]
     }
 }
