@@ -3,6 +3,10 @@
         {
             "name": "Countdown Timer",
             "path": "."
+        },
+        {
+            "name": "Common",
+            "path": "../../common"
         }
     ],
     "settings": {
@@ -16,7 +20,7 @@
                 "`timescale 1ns / 1ps",
                 "${commentprefix} @file ${filename}", 
                 "${commentprefix}",
-                "${commentprefix} @note Copyright (c) ${year} AMSUC - Countdown Timer - Dominik Kala i Dawid Jaraczewski",
+                "${commentprefix} @note Copyright (c) ${year} AMSUC - Dominik Kala i Dawid Jaraczewski",
             ]
         },
         "cSpell.language": "en",

@@ -1,0 +1,39 @@
+{
+    "folders": [
+        {
+            "name": "RGB LED APP",
+            "path": "."
+        },
+        {
+            "name": "Common",
+            "path": "../../common"
+        }
+    ],
+    "settings": {
+        "fileHeaderComment.parameter": {
+            "*": {
+                "commentprefix": "///",
+            }
+        },
+        "fileHeaderComment.template": {
+            "*" : [
+                "`timescale 1ns / 1ps",
+                "${commentprefix} @file ${filename}", 
+                "${commentprefix}",
+                "${commentprefix} @note Copyright (c) ${year} AMSUC - Dominik Kala i Dawid Jaraczewski",
+            ]
+        },
+        "cSpell.language": "en",
+    },
+    "extensions": {
+        "recommendations": [
+            "eamodio.gitlens", 
+            "doi.fileheadercomment",
+            "streetsidesoftware.code-spell-checker",
+            "shd101wyy.markdown-preview-enhanced",
+            "mshr-h.veriloghdl",
+            "hediet.vscode-drawio",
+            "nopeslide.vscode-drawio-plugin-rtl"
+        ]
+    }
+}
