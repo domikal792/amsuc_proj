@@ -45,7 +45,7 @@ module SWITCH_DEBOUNCER #(
     .CEO(repeat_presc_cnt_ceo)
   );
 
-  always @(posedge CLK) begin
+  always @(posedge CLK or posedge CLR) begin
     if (CLR)
       P_OUT <= {BITS_NUM{1'b0}};
     else begin
