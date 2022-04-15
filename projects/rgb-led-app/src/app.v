@@ -220,7 +220,7 @@ module APP (
     .Q(rgb_b_fill_factor)
   );
   
-  // Sterownik PWM
+  // Sterownik PWM diody RGB
   RGB_DRIVER #(
     .ACT_STATE(1'b1),
     .FILL_FACTOR_MAX(FILL_FACTOR_MAX)
