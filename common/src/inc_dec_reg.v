@@ -8,23 +8,20 @@ module INC_DEC_REG #(
 ) (
   input CLK,
   input CLR,
-  input CE,
-  input INC_EN,
-  input DEC_EN,
+  input INC_CE,
+  input DEC_CE,
   output reg [BITS_NUM-1:0] Q
 );
   always @(posedge CLK or posedge CLR) begin
     if (CLR)
       Q <= {BITS_NUM{1'b0}};
     else begin
-      if (CE) begin
-        if (INC_EN && ~DEC_EN)
-          Q <= Q + 1;
-        else if (~INC_EN && DEC_EN)
-          Q <= Q - 1;
-        else
-          Q <= Q;
-      end
+      if (INC_CE)
+        Q <= Q + 1;
+      else if (DEC_CE)
+        Q <= Q - 1;
+      else
+        Q <= Q;
     end
   end
 endmodule

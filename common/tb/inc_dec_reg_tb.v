@@ -3,6 +3,8 @@
 ///
 /// @note Copyright (c) 2022 AMSUC - Dominik Kala i Dawid Jaraczewski
 
+// TODO: Fix this sim since INC_DEC_REG module has changed
+
 module INC_DEC_REG_TB;
   parameter BITS_NUM = 3;
 
