@@ -5,14 +5,14 @@
 
 /// Demultiplekser 1 na 4
 ///
-/// @tparam BITS_NUM - Liczba bitow danych wejsciowych.
+/// @tparam BITS_NUM - Liczba bitow danych.
 ///
 /// @param [IN] X - Dane wejściowe.
 /// @param [IN] SEL - Wybór wyjścia.
-/// @param [OUT] Y0 - Wyjście 0
-/// @param [OUT] Y1 - Wyjście 1
-/// @param [OUT] Y2 - Wyjście 2
-/// @param [OUT] Y3 - Wyjście 3
+/// @param [OUT] Y0 - Wyjście 1
+/// @param [OUT] Y1 - Wyjście 2
+/// @param [OUT] Y2 - Wyjście 3
+/// @param [OUT] Y3 - Wyjście 4
 
 module DEMUX_1_4 #(
   parameter BITS_NUM = 1

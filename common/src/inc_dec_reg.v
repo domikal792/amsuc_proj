@@ -3,6 +3,16 @@
 ///
 /// @note Copyright (c) 2022 AMSUC - Dominik Kala i Dawid Jaraczewski
 
+/// Moduł inkrementujący/dekrementujący rejestr na podstawie sygnału wejściowego.
+///
+/// @tparam IN_BITS_NUM - Liczba bitow wyjściowej liczby.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] INC_CE - Aktywacja inkrementacji.
+/// @param [IN] DEC_CE - Aktywacja dekrementacji.
+/// @param [OUT] Q - Liczba zapisana w systemie dziesiętnym.
+
 module INC_DEC_REG #(
   parameter BITS_NUM = 8
 ) (

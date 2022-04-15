@@ -3,6 +3,18 @@
 ///
 /// @note Copyright (c) 2022 AMSUC - Dominik Kala i Dawid Jaraczewski
 
+/// Kanał PWM
+///
+/// @tparam ACT_STATE - Aktualny stan. ??
+/// @tparam FILL_FACTOR_MAX - Maksymalne wypełnienie.
+/// @tparam FILL_FACTOR_BITS_NUM - Liczba bitow maksymalnego wypełnienia.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara.
+/// @param [IN] FILL_FACTOR - Zadane wypełnienie.
+/// @param [OUT] Q - Wyjście.
+
 module PWM_CHANNEL #(
   parameter ACT_STATE = 1,
   parameter FILL_FACTOR_MAX = 255,

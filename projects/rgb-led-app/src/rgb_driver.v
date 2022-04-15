@@ -3,6 +3,22 @@
 ///
 /// @note Copyright (c) 2022 AMSUC - Dominik Kala i Dawid Jaraczewski
 
+/// Zarządzanie PWM dla diody RGB
+///
+/// @tparam ACT_STATE - Aktualny stan. ??
+/// @tparam FILL_FACTOR_MAX - Maksymalne wypełnienie.
+/// @tparam FILL_FACTOR_BITS_NUM - Liczba bitow maksymalnego wypełnienia.
+///
+/// @param [IN] CLK - Zegar.
+/// @param [IN] CLR - Aysnchroniczne wejscie resetujace stan modulu.
+/// @param [IN] CE - Aktywacja zegara.
+/// @param [IN] R_FILL_FACTOR - Zadane wypełnienie koloru czerwonego.
+/// @param [IN] G_FILL_FACTOR - Zadane wypełnienie koloru zielonego.
+/// @param [IN] B_FILL_FACTOR - Zadane wypełnienie koloru niebieskiego.
+/// @param [OUT] R - Wyjście kanału czerwonego.
+/// @param [OUT] G - Wyjście kanału zielonego.
+/// @param [OUT] B - Wyjście kanału niebieskiego.
+
 module RGB_DRIVER #(
   parameter ACT_STATE = 1,
   parameter FILL_FACTOR_MAX = 255,

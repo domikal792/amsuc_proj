@@ -3,6 +3,17 @@
 ///
 /// @note Copyright (c) 2022 AMSUC - Dominik Kala i Dawid Jaraczewski
 
+/// Multiplekser 4 na 1
+///
+/// @tparam BITS_NUM - Liczba bitow danych.
+///
+/// @param [IN] A - Dane wejściowe 1.
+/// @param [IN] B - Dane wejściowe 2.
+/// @param [IN] C - Dane wejściowe 3.
+/// @param [IN] D - Dane wejściowe 4.
+/// @param [IN] SEL - Wybór wejścia.
+/// @param [OUT] Q - Dane wyjściowe
+
 module MUX_4_1 #(
   parameter BITS_NUM = 1
 ) (
