@@ -5,7 +5,7 @@
 
 /// Zarządzanie PWM dla diody RGB
 ///
-/// @tparam ACT_STATE - Aktualny stan. ??
+/// @tparam ACT_STATE - Stan aktywny 0 lub 1.
 /// @tparam FILL_FACTOR_MAX - Maksymalne wypełnienie.
 /// @tparam FILL_FACTOR_BITS_NUM - Liczba bitow maksymalnego wypełnienia.
 ///
